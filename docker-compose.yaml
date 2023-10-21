@@ -1,11 +1,26 @@
 version: '3.1'
 
 services:
+  watch_together_backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    container_name: watch_together_backend
+    restart: always
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+
   watch_together_frontend:
     build:
       context: frontend
       dockerfile: Dockerfile
     container_name: watch_together_frontend
+    depends_on:
+      - watch_together_backend
     restart: always
     volumes:
       - ./frontend:/app
