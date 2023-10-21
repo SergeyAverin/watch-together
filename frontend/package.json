@@ -4,7 +4,8 @@
   "description": "This is the frontend for the watch together app. Watch together is an app for watching videos together.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV='development' webpack serve",
+    "build": "NODE_ENV='production' webpack serve"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/SergeyAverin/watch-together#readme",
   "devDependencies": {
+    "@types/react": "^18.2.31",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
@@ -33,6 +35,8 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "react": "^18.2.0"
+    "@types/react-dom": "^18.2.14",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
