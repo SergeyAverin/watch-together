@@ -1,10 +1,15 @@
 import React from "react";
 
+import MainRouter from "./routers";
+import { BrowserRouter } from "react-router-dom";
+
 
 const App: React.FC = () => {
   return (
     <div>
-        app
+      <BrowserRouter>
+          <MainRouter />
+      </BrowserRouter>
     </div>
   );
 };
