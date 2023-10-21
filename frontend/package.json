@@ -1,0 +1,35 @@
+{
+  "name": "watch-together",
+  "version": "1.0.0",
+  "description": "This is the frontend for the watch together app. Watch together is an app for watching videos together.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergeyAverin/watch-together.git"
+  },
+  "keywords": [
+    "React"
+  ],
+  "author": "SergeyAverin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergeyAverin/watch-together/issues"
+  },
+  "homepage": "https://github.com/SergeyAverin/watch-together#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "react-svg-loader": "^3.0.3",
+    "sass": "^1.69.4",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.5.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
