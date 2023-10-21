@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  watch_together_frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    container_name: watch_together_frontend
+    restart: always
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
