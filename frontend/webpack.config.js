@@ -9,6 +9,7 @@ const PORT = process.env.FRONTEND_PORT;
 const HOST = process.env.FRONTEND_HOST;
 const DEBUG = process.env.DEBUG;
 const API_BASE_URL = process.env.API_BASE_URL;
+const TEST_VIDEO_URL = process.env.TEST_VIDEO_URL;
 
 const plugins = [
   new CleanWebpackPlugin(),
@@ -22,6 +23,7 @@ const plugins = [
     NODE_ENV: MODE,
     DEBUG: DEBUG,
     API_BASE_URL: API_BASE_URL,
+    TEST_VIDEO_URL: TEST_VIDEO_URL
   }),
 ];
 
