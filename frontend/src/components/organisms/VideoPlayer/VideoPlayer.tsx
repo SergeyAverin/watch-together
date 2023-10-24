@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { Flex, Margin, VideoPropgressBar, IconButton } from "@atoms/index";
-import { PlayVideo } from "@molecules/PlayVideo";
-import { PauseVideo } from "@molecules/PauseVideo";
 import { formatVideoTime } from "@utils/formatTime";
 
 import RewindLeft from '@public/RewindLeft.svg'
 import RewindRight from '@public/RewindRight.svg'
 import FullScreenIcon from '@public/FullScreenIcon.svg'
+import PauseIcon from '@public/PauseIcon.svg'
+import PlayIcon from '@public/PlayIcon.svg'
 
 
 import "./VideoPlayer.sass";
@@ -47,7 +47,6 @@ export const VideoPlayer: React.FC = () => {
 
     socketRef.current.onopen = () => {
       console.log('WebSocket connected');
-      console.log(socketRef.current);
     };
 
     socketRef.current.onmessage = (event) => {
@@ -74,12 +73,10 @@ export const VideoPlayer: React.FC = () => {
   const onPause = () => {
     if (socketRef.current) {
       socketRef.current.send(`{"event": "pause", "currentTime": "${videoNode?.currentTime}"}`)
-      console.log('stop')
     }
   }
   const onPlay = () => {
     if (socketRef.current) {
-      console.log('play')
       socketRef.current.send(`{"event": "play", "currentTime": "${videoNode?.currentTime}"}`)
     }
   }
@@ -91,6 +88,16 @@ export const VideoPlayer: React.FC = () => {
   const rewind = (second: number) => {
       if (videoNode) {
         videoNode.currentTime = videoNode.currentTime + second; 
+    }
+  }
+  const playVideo = () => {
+    if (videoNode) {
+      videoNode.play();
+    }
+  }
+  const pauseVideo = () => {
+    if (videoNode) {
+      videoNode.pause();
     }
   }
   return (  
@@ -116,9 +123,9 @@ export const VideoPlayer: React.FC = () => {
         <Flex alignItems="flex-start" justifyContent="space-between">
           <Flex alignItems="flex-start" justifyContent="flex-start">
           {videoRef.current?.paused ? (
-            <PlayVideo video={videoNode} setPaused={setIsPaused} />
+            <IconButton  clickFunction={() => playVideo()} icon={<PlayIcon />} />
           ) : (
-            <PauseVideo video={videoNode} setPaused={setIsPaused} />
+            <IconButton  clickFunction={() => pauseVideo()} icon={<PauseIcon />} />
           )}
             {duration && formatVideoTime(currentTime as number)} /{" "}
             {duration && formatVideoTime(duration as number)}
