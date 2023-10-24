@@ -86,8 +86,13 @@ export const VideoPlayer: React.FC = () => {
     }
   }
   const rewind = (second: number) => {
+    const isPaused = videoNode?.paused
       if (videoNode) {
+        videoNode.pause();
         videoNode.currentTime = videoNode.currentTime + second; 
+        if (!isPaused) {
+          videoNode.play();
+        }
     }
   }
   const playVideo = () => {
@@ -105,7 +110,6 @@ export const VideoPlayer: React.FC = () => {
       <video
         className="video-player"
         ref={videoRef}
-        controls={true}
         onLoadedMetadata={handleLoadedMetadata}
         onTimeUpdate={handleTimeUpdate}
         onPause={onPause}
