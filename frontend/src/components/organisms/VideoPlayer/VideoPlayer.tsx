@@ -23,6 +23,7 @@ export const VideoPlayer: React.FC = () => {
   const [duration, setDuration] = useState<number | null>(null);
   const [currentTime, setCurrentTime] = useState<number | null>(null);
   const socketRef = useRef<WebSocket|undefined>();
+  const [isTimeWidget, setIsTimeWidget] = useState(true)
   
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
@@ -131,9 +132,17 @@ export const VideoPlayer: React.FC = () => {
           ) : (
             <IconButton  clickFunction={() => pauseVideo()} icon={<PauseIcon />} />
           )}
-          <div className="video-player__time">
-            {duration && formatVideoTime(currentTime as number)} /{" "}
-            {duration && formatVideoTime(duration as number)}
+          <div className="video-player__time" onClick={() => setIsTimeWidget((prev) => !prev)}>
+            {isTimeWidget ? 
+              <>
+                {duration && formatVideoTime(currentTime as number)} /{" "}
+                {duration && formatVideoTime(duration as number)}
+              </>
+              :
+              <>
+                {duration && currentTime && formatVideoTime((duration - currentTime) as number)}
+              </>
+            }
           </div>
           </Flex>
             <IconButton icon={<FullScreenIcon />} clickFunction={openFullScreen} />
