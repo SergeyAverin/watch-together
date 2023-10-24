@@ -3,7 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Flex, Margin, VideoPropgressBar } from "@atoms/index";
 import { PlayVideo } from "@molecules/PlayVideo";
 import { PauseVideo } from "@molecules/PauseVideo";
+import { RewindButton } from "@organisms/RewindButton";
 import { formatVideoTime } from "@utils/formatTime";
+
+import RewindLeft from '@public/RewindLeft.svg'
+import RewindRight from '@public/RewindRight.svg'
+
 
 import "./VideoPlayer.sass";
 
@@ -89,6 +94,7 @@ export const VideoPlayer: React.FC = () => {
         onPause={onPause}
         onPlay={onPlay}
         muted={true}
+        autoPlay={true}
       >
         <source src={TEST_VIDEO_URL} type="video/mp4" />
         Your browser does not support the video tag.
@@ -109,6 +115,10 @@ export const VideoPlayer: React.FC = () => {
           </div>
         </Flex>
       </Margin>
+      <Flex alignItems="flex-start" justifyContent="space-between">
+        <RewindButton video={videoNode} second={-10} icon={<RewindLeft />} />
+        <RewindButton video={videoNode} second={10} icon={<RewindRight />} />
+      </Flex>
     </>
   );
 };
