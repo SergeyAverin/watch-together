@@ -4,6 +4,7 @@ import { Flex, Margin, IconButton } from "@atoms/index";
 
 import './SideBar.sass'
 import CopyLinkIcon from '@public/CopyLinkIcon.svg'
+import { UserCount } from "@molecules/UserCount";
 
 
 const SideBar: React.FC = () => {
@@ -16,6 +17,7 @@ const SideBar: React.FC = () => {
             <Flex justifyContent="space-around" alignItems="center" flexDirection="column">
                 <div>
                     <IconButton icon={<CopyLinkIcon />} clickFunction={(copyLink)} />
+                    <UserCount  />
                 </div>
                 <div>sdf</div>
                 <div>sdf</div>
