@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Flex, Margin, VideoPropgressBar } from "@atoms/index";
+import { Flex, Margin, VideoPropgressBar, IconButton } from "@atoms/index";
 import { PlayVideo } from "@molecules/PlayVideo";
 import { PauseVideo } from "@molecules/PauseVideo";
 import { RewindButton } from "@organisms/RewindButton";
@@ -8,6 +8,7 @@ import { formatVideoTime } from "@utils/formatTime";
 
 import RewindLeft from '@public/RewindLeft.svg'
 import RewindRight from '@public/RewindRight.svg'
+import FullScreenIcon from '@public/FullScreenIcon.svg'
 
 
 import "./VideoPlayer.sass";
@@ -83,6 +84,11 @@ export const VideoPlayer: React.FC = () => {
       socketRef.current.send(`{"event": "play", "currentTime": "${videoNode?.currentTime}"}`)
     }
   }
+  const openFullScreen = () => {
+    if (videoNode) {
+      videoNode.requestFullscreen()
+    }
+  }
   return (  
     <>
       <video
@@ -104,14 +110,17 @@ export const VideoPlayer: React.FC = () => {
             { videoRef.current  && duration && <VideoPropgressBar video={videoNode} progress={(100 * videoRef.current.currentTime) / duration} /> }
         </Margin>
         <Flex alignItems="flex-start" justifyContent="space-between">
+          <Flex alignItems="flex-start" justifyContent="flex-start">
           {videoRef.current?.paused ? (
             <PlayVideo video={videoNode} setPaused={setIsPaused} />
           ) : (
             <PauseVideo video={videoNode} setPaused={setIsPaused} />
           )}
-          <div className="video-player__time">
             {duration && formatVideoTime(currentTime as number)} /{" "}
             {duration && formatVideoTime(duration as number)}
+          </Flex>
+          <div className="video-player__time">
+            <IconButton icon={<FullScreenIcon />} clickFunction={openFullScreen} />
           </div>
         </Flex>
       </Margin>
