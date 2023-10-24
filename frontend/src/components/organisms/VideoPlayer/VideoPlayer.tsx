@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Flex, Margin, VideoPropgressBar, IconButton } from "@atoms/index";
 import { PlayVideo } from "@molecules/PlayVideo";
 import { PauseVideo } from "@molecules/PauseVideo";
-import { RewindButton } from "@organisms/RewindButton";
 import { formatVideoTime } from "@utils/formatTime";
 
 import RewindLeft from '@public/RewindLeft.svg'
@@ -89,6 +88,11 @@ export const VideoPlayer: React.FC = () => {
       videoNode.requestFullscreen()
     }
   }
+  const rewind = (second: number) => {
+      if (videoNode) {
+        videoNode.currentTime = videoNode.currentTime + second; 
+    }
+  }
   return (  
     <>
       <video
@@ -125,8 +129,8 @@ export const VideoPlayer: React.FC = () => {
         </Flex>
       </Margin>
       <Flex alignItems="flex-start" justifyContent="space-between">
-        <RewindButton video={videoNode} second={-10} icon={<RewindLeft />} />
-        <RewindButton video={videoNode} second={10} icon={<RewindRight />} />
+        <IconButton  clickFunction={() => rewind(-10)} icon={<RewindLeft />} />
+        <IconButton  clickFunction={() => rewind(10)} icon={<RewindRight />} />
       </Flex>
     </>
   );
