@@ -131,12 +131,12 @@ export const VideoPlayer: React.FC = () => {
           ) : (
             <IconButton  clickFunction={() => pauseVideo()} icon={<PauseIcon />} />
           )}
+          <div className="video-player__time">
             {duration && formatVideoTime(currentTime as number)} /{" "}
             {duration && formatVideoTime(duration as number)}
-          </Flex>
-          <div className="video-player__time">
-            <IconButton icon={<FullScreenIcon />} clickFunction={openFullScreen} />
           </div>
+          </Flex>
+            <IconButton icon={<FullScreenIcon />} clickFunction={openFullScreen} />
         </Flex>
       </Margin>
       <Flex alignItems="flex-start" justifyContent="space-between">
