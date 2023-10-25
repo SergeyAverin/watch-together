@@ -126,7 +126,7 @@ export const VideoPlayer: React.FC = () => {
             { videoRef.current  && duration && <VideoPropgressBar video={videoNode} progress={(100 * videoRef.current.currentTime) / duration} /> }
         </Margin>
         <Flex alignItems="flex-start" justifyContent="space-between">
-          <Flex alignItems="flex-start" justifyContent="flex-start">
+          <Flex alignItems="center" justifyContent="flex-start">
           {videoRef.current?.paused ? (
             <IconButton  clickFunction={() => playVideo()} icon={<PlayIcon />} />
           ) : (
@@ -140,7 +140,8 @@ export const VideoPlayer: React.FC = () => {
               </>
               :
               <>
-                {duration && currentTime && formatVideoTime((duration - currentTime) as number)}
+                -{duration && currentTime && formatVideoTime((duration - currentTime) as number)} /{" "}
+                {duration && formatVideoTime(duration as number)}
               </>
             }
           </div>
