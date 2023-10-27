@@ -39,3 +39,7 @@ export const VideoPropgressBar: React.FC<IVideoPropgressBarProps> = ({
     </div>
   );
 };
+
+VideoPropgressBar.defaultProps = {
+  progress: 0
+}
