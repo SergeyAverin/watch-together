@@ -4,6 +4,7 @@ import { Flex, Margin, IconButton } from "@atoms/index";
 import { formatVideoTime } from "@utils/formatTime";
 import { VideoProgressBar } from "@molecules/VideoProgressBar";
 import { VolumeProgressBar } from "@molecules/VolumeProgressBar/VolumeProgressBar"
+import { VideoSpeed } from "@molecules/VideoSpeed";
 
 import RewindLeft from '@public/RewindLeft.svg'
 import RewindRight from '@public/RewindRight.svg'
@@ -126,7 +127,6 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = ({setUsers}) => {
         onTimeUpdate={handleTimeUpdate}
         onPause={onPause}
         onPlay={onPlay}
-        controls={true}
         autoPlay={true}
       >
         <source src={TEST_VIDEO_URL} type="video/mp4" />
@@ -162,6 +162,9 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = ({setUsers}) => {
           </Flex>
             <IconButton icon={<FullScreenIcon />} clickFunction={openFullScreen} />
         </Flex>
+      </Margin>
+      <Margin marginTop="30px">
+        <VideoSpeed  video={videoNode}  />
       </Margin>
       <Flex alignItems="flex-start" justifyContent="space-between">
         <IconButton  clickFunction={() => rewind(-10)} icon={<RewindLeft />} />
