@@ -4,10 +4,9 @@ import { ProgressBar } from "@atoms/index";
 
 
 interface IVideoProgressBarProps {
-    progress: number;
     video: HTMLVideoElement | null;
   }
-export const VideoProgressBar: React.FC<IVideoProgressBarProps> = ({progress, video}) => {
+export const VideoProgressBar: React.FC<IVideoProgressBarProps> = ({video}) => {
     const onChangeProgressBar = (value: number) => {
         if (video) {
             video.currentTime = (video.duration * value) / 100;

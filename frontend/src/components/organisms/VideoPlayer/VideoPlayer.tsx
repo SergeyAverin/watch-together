@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Flex, Margin, IconButton } from "@atoms/index";
 import { formatVideoTime } from "@utils/formatTime";
 import { VideoProgressBar } from "@molecules/VideoProgressBar";
+import { VolumeProgressBar } from "@molecules/VolumeProgressBar/VolumeProgressBar"
 
 import RewindLeft from '@public/RewindLeft.svg'
 import RewindRight from '@public/RewindRight.svg'
@@ -46,6 +47,9 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = ({setUsers}) => {
   useEffect(() => {
     setVideoNode(videoRef.current);
     setIsPaused(videoRef.current?.paused);
+    if (videoRef.current) {
+      videoRef.current.muted = false
+    }
   }, [videoRef]);
 
 
@@ -122,7 +126,7 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = ({setUsers}) => {
         onTimeUpdate={handleTimeUpdate}
         onPause={onPause}
         onPlay={onPlay}
-        muted={true}
+        controls={true}
         autoPlay={true}
       >
         <source src={TEST_VIDEO_URL} type="video/mp4" />
@@ -130,7 +134,7 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = ({setUsers}) => {
       </video>
       <Margin marginTop="30px">
         <Margin marginBottom="20px">
-            { videoRef.current  && duration && <VideoProgressBar video={videoNode} progress={(100 * videoRef.current.currentTime) / duration} /> }
+            { videoRef.current  && duration && <VideoProgressBar video={videoNode} /> }
         </Margin>
         <Flex alignItems="flex-start" justifyContent="space-between">
           <Flex alignItems="center" justifyContent="flex-start">
@@ -139,6 +143,9 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = ({setUsers}) => {
           ) : (
             <IconButton  clickFunction={() => pauseVideo()} icon={<PauseIcon />} />
           )}
+          <Margin marginLeft="8px" marginRight="8px">
+              { videoRef.current  && duration && <VolumeProgressBar video={videoNode} progress={0.5} /> }
+          </Margin>
           <div className="video-player__time" onClick={() => setIsTimeWidget((prev) => !prev)}>
             {isTimeWidget ? 
               <>
