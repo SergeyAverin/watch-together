@@ -6,11 +6,15 @@ import { Flex, IconButton } from "@atoms/index";
 import UserCountIcon from '@public/UserCountIcon.svg'
 
 
-export const UserCount: React.FC = () => {
+interface IUserCountProps {
+    userCount: number
+}
+
+export const UserCount: React.FC<IUserCountProps> = ({ userCount }) => {
     return (
         <Flex alignItems="center" justifyContent="center" flexDirection="column">
             <IconButton icon={<UserCountIcon />} clickFunction={() => {}} />
-            0
+            {userCount}
         </Flex>
     )
 }

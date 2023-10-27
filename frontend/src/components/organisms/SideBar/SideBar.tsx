@@ -7,7 +7,11 @@ import CopyLinkIcon from '@public/CopyLinkIcon.svg'
 import { UserCount } from "@molecules/UserCount";
 
 
-const SideBar: React.FC = () => {
+interface ISideBarProps {
+    userCount: number
+}
+
+const SideBar: React.FC<ISideBarProps> = ({ userCount }) => {
     const copyLink  = () => {
         const url = window.location.href;
         navigator.clipboard.writeText(url);
@@ -17,7 +21,7 @@ const SideBar: React.FC = () => {
             <Flex justifyContent="space-around" alignItems="center" flexDirection="column">
                 <div>
                     <IconButton icon={<CopyLinkIcon />} clickFunction={(copyLink)} />
-                    <UserCount  />
+                    <UserCount  userCount={userCount} />
                 </div>
                 <div>sdf</div>
                 <div>sdf</div>

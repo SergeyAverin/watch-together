@@ -1,4 +1,7 @@
+import json
+
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+
 
 main_router = APIRouter()
 
@@ -25,7 +28,7 @@ manager = ConnectionManager()
 @main_router.get("/")
 async def root():
     ''''''
-    return {"message": "Hello World"}
+    return {"active_connections": len(manager.active_connections)}
 
 
 @main_router.websocket('/player')
@@ -35,8 +38,11 @@ async def player(websocket: WebSocket):
     try:
         while True:
             data = await websocket.receive_text()
+            message = json.loads(data)
+            message['usersCount'] = len(manager.active_connections)
+            # message['users'] = manager.active_connections
             #await manager.send_personal_message(f"You wrote: {data}", websocket)
-            await manager.broadcast(data)
+            await manager.broadcast(json.dumps(message))
     except WebSocketDisconnect:
         manager.disconnect(websocket)
         await manager.broadcast({"event": "error"})

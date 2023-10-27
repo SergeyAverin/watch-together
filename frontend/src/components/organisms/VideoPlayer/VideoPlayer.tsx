@@ -16,7 +16,12 @@ const TEST_VIDEO_URL = process.env.TEST_VIDEO_URL as string;
 const BACKEND_HOST = process.env.BACKEND_HOST as string;
 const BACKEND_PORT = process.env.BACKEND_PORT as string;
 
-export const VideoPlayer: React.FC = () => {
+
+interface IVideoPlayerProps {
+  setUsers: Function
+}
+
+export const VideoPlayer: React.FC<IVideoPlayerProps> = ({setUsers}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPaused, setIsPaused] = useState<boolean | undefined>(false);
   const [videoNode, setVideoNode] = useState(videoRef.current);
@@ -52,6 +57,7 @@ export const VideoPlayer: React.FC = () => {
 
     socketRef.current.onmessage = (event) => {
       const message = JSON.parse(event.data)
+      setUsers(message.usersCount)
       if (message.event == 'play' && videoNode) {
         videoNode?.play()
       }
