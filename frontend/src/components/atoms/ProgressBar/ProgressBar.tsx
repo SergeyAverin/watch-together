@@ -1,15 +1,15 @@
 import React, { useRef, useState } from "react";
 
-import "./VideoPropgressBar.sass";
+import "./ProgressBar.sass";
 
-interface IVideoPropgressBarProps {
-  progress: number;
-  video: HTMLVideoElement | null;
+interface IProgressBarProps {
+  progress?: number;
+  onChangeProgressBar: Function;
 }
 
-export const VideoPropgressBar: React.FC<IVideoPropgressBarProps> = ({
+export const ProgressBar: React.FC<IProgressBarProps> = ({
   progress,
-  video,
+  onChangeProgressBar,
 }) => {
   const progressBarRef = useRef<HTMLDivElement>(null);
   const [progressState, setProgressState] = useState(progress);
@@ -20,26 +20,24 @@ export const VideoPropgressBar: React.FC<IVideoPropgressBarProps> = ({
       const position = event.clientX - rect.left;
       const newValue = Math.round((position / rect.width) * 100);
       setProgressState(newValue);
-      if (video) {
-        video.currentTime = (video.duration * newValue) / 100;
-      }
+      onChangeProgressBar(newValue);
     }
   };
   const onMouseDown = () => setIsDown(true);
   const onMouseUp = () => setIsDown(false);
   return (
-    <div className="video-propgress-bar" ref={progressBarRef} onMouseMove={(event: React.MouseEvent) => changeCurrentTime(event, false)}  onClick={(event: React.MouseEvent) => changeCurrentTime(event, true)} onMouseDown={onMouseDown} onMouseUp={onMouseUp} >
-      <div className="video-propgress-bar__line" />
+    <div className="propgress-bar" ref={progressBarRef} onMouseMove={(event: React.MouseEvent) => changeCurrentTime(event, false)}  onClick={(event: React.MouseEvent) => changeCurrentTime(event, true)} onMouseDown={onMouseDown} onMouseUp={onMouseUp} >
+      <div className="propgress-bar__line" />
       <div
-        className="video-propgress-bar__active"
+        className="propgress-bar__active"
         style={{ width: `${progressState}%` }}
       >
-        <div className="video-propgress-bar__elips"></div>
+        <div className="propgress-bar__elips"></div>
       </div>
     </div>
   );
 };
 
-VideoPropgressBar.defaultProps = {
+ProgressBar.defaultProps = {
   progress: 0
 }

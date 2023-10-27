@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Flex, Margin, VideoPropgressBar, IconButton } from "@atoms/index";
+import { Flex, Margin, IconButton } from "@atoms/index";
 import { formatVideoTime } from "@utils/formatTime";
+import { VideoProgressBar } from "@molecules/VideoProgressBar";
 
 import RewindLeft from '@public/RewindLeft.svg'
 import RewindRight from '@public/RewindRight.svg'
@@ -129,7 +130,7 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = ({setUsers}) => {
       </video>
       <Margin marginTop="30px">
         <Margin marginBottom="20px">
-            { videoRef.current  && duration && <VideoPropgressBar video={videoNode} progress={(100 * videoRef.current.currentTime) / duration} /> }
+            { videoRef.current  && duration && <VideoProgressBar video={videoNode} progress={(100 * videoRef.current.currentTime) / duration} /> }
         </Margin>
         <Flex alignItems="flex-start" justifyContent="space-between">
           <Flex alignItems="center" justifyContent="flex-start">
