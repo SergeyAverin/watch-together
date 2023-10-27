@@ -28,3 +28,9 @@ services:
       - 3000:3000
     env_file:
       - .env
+
+  redis:
+    image: redis:7.2-rc2
+    container_name: watch_together_redis
+    ports:
+      - 6379:6379
