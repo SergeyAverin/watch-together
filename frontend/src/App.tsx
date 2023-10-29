@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import MainRouter from "./routers";
-import { UserIdProvider } from "./providers/UserIdProvIder";
+import { UserProvider } from "./providers/UserProvIder";
 
 import './sass/style.sass'
 
@@ -11,11 +11,11 @@ import './sass/style.sass'
 const App: React.FC = () => {
   return (
     <div>
-      <UserIdProvider>
+      <UserProvider>
         <BrowserRouter>
             <MainRouter />
         </BrowserRouter>
-      </UserIdProvider>
+      </UserProvider>
     </div>
   );
 };
