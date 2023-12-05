@@ -20,5 +20,3 @@ export const playerSlice = createSlice({
 });
 
 export const { toggle } = playerSlice.actions;
-
-export default playerSlice.reducer;

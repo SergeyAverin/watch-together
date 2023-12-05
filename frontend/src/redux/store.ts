@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import { playerSlice } from "./features/playerSlice";
+
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    player: playerSlice.reducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
