@@ -18,7 +18,7 @@ export const ProgressBar: React.FC<IProgressBarProps> = ({
     if (progressBarRef.current && (isDown || isClick)) {
       const rect = progressBarRef.current.getBoundingClientRect();
       const position = event.clientX - rect.left;
-      const newValue = Math.round((position / rect.width) * 100);
+      const newValue = Math.round((position / rect.width) * 100) + 1;
       setProgressState(newValue);
       onChangeProgressBar(newValue);
     }
