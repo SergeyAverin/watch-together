@@ -39,10 +39,11 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = () => {
 
   useEffect(()=> {
     const message = {
-      event: isPaused ? "pause_video" : "'play_video",
+      event: isPaused ? "pause_video" : "play_video",
       currentTime: videoRef.current?.currentTime
     }
     ws?.send(stringifyMessage(message))      
+    console.log(stringifyMessage(message))
   }, [isPaused])
 
   return (
