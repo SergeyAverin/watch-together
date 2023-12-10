@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Center } from "@atoms/index";
 import { VideoPlayer } from "@organisms/VideoPlayer";
@@ -7,13 +7,11 @@ import { UsersPanel } from "@organisms/UsersPanel";
 
 
 const PlayerPage: React.FC = () => {
-  const [users, setUsers] = useState(0)
-
   return (
     <Center>
       <div>
-        <SideBar userCount={users} />
-        <VideoPlayer setUsers={setUsers} />
+        <SideBar />
+        <VideoPlayer />
         <UsersPanel />
       </div>
     </Center>
