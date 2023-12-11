@@ -34,3 +34,10 @@ services:
     container_name: watch_together_redis
     ports:
       - 6379:6379
+
+  watch_together_db:
+    image: postgres
+    container_name: watch_together_db
+    restart: always
+    env_file:
+      - .env
