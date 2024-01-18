@@ -66,6 +66,14 @@ export const useVideoOperations = (
     }
   };
 
+  const setVideoCurrentTime = (currentTime: number) => {
+    console.log(`set video current time ${currentTime}`);
+    dispatch(setCurrentTime(currentTime));
+    if (videoRef.current) {
+      videoRef.current.currentTime = currentTime;
+    }
+  };
+
   return {
     videoPause,
     videoPlay,
@@ -73,5 +81,6 @@ export const useVideoOperations = (
     openFullScreen,
     handleLoadedMetadata,
     handleTimeUpdate,
+    setVideoCurrentTime,
   };
 };
