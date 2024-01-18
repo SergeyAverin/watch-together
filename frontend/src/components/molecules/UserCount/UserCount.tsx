@@ -1,20 +1,25 @@
 import React from "react";
 
 import { Flex, IconButton } from "@atoms/index";
-import { useSelector } from "react-redux";
 
-import { usersCountSelector } from "@redux/selectors/usersListSelectores";
+import { isPanelShowSelector, usersCountSelector } from "@redux/selectors/usersListSelectores";
 import UserCountIcon from '@public/UserCountIcon.svg'
+import { useAppDispatch, useAppSelector } from "@hooks/storeHooks";
+import { setIsPanelShow } from "@redux/features/userListSlice";
 
 
-interface IUserCountProps {
-}
+export const UserCount: React.FC = () => {
+    const userCount = useAppSelector(usersCountSelector)
+    const dispatch = useAppDispatch()
+    const isPanelShow = useAppSelector(isPanelShowSelector)
 
-export const UserCount: React.FC<IUserCountProps> = () => {
-    const userCount = useSelector(usersCountSelector)
+    const onClick = () => {
+        dispatch(setIsPanelShow(!isPanelShow))
+    }
+    
     return (
         <Flex alignItems="center" justifyContent="center" flexDirection="column">
-            <IconButton icon={<UserCountIcon />} clickFunction={() => {}} />
+            <IconButton icon={<UserCountIcon />} clickFunction={onClick} />
             {userCount}
         </Flex>
     )
