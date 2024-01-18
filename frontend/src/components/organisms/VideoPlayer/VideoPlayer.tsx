@@ -18,6 +18,7 @@ import {
 } from "@redux/selectors/playerSelectores";
 import { setIsInteracted } from "@redux/features/playerSlice";
 import { stringifyMessage } from "@utils/socketMessaeg";
+import { useUser } from "../../../providers/UserProvIder";
 
 
 const TEST_VIDEO_URL = process.env.TEST_VIDEO_URL as string;
@@ -35,16 +36,18 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = () => {
   const isPaused = useAppSelector(isPausedSelector)
   const currentTime = useAppSelector(currentTimeSelector);
   const duration = useAppSelector(durationSelector);
+  const user = useUser()
 
 
   useEffect(()=> {
     const message = {
       event: isPaused ? "pause_video" : "play_video",
-      currentTime: videoRef.current?.currentTime
+      currentTime: videoRef.current?.currentTime,
+      user
     }
-    ws?.send(stringifyMessage(message))      
-    console.log(stringifyMessage(message))
+    ws?.send(stringifyMessage(message))
   }, [isPaused])
+
 
   return (
     <>

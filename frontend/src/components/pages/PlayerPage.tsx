@@ -4,6 +4,7 @@ import { Center } from "@atoms/index";
 import { VideoPlayer } from "@organisms/VideoPlayer";
 import { SideBar } from "@organisms/SideBar";
 import { UsersPanel } from "@organisms/UsersPanel";
+import { FollowPanel } from "@organisms/FollowPanel/FollowPanel";
 
 
 const PlayerPage: React.FC = () => {
@@ -13,6 +14,7 @@ const PlayerPage: React.FC = () => {
         <SideBar />
         <VideoPlayer />
         <UsersPanel />
+        <FollowPanel />
       </div>
     </Center>
   );
