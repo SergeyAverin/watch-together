@@ -16,7 +16,7 @@ user_in_room_service = UserInRoomService(
 @player_router.get('/{room_name}')
 def player(room_name: str):
     count = user_in_room_service.get_len_users_in_room(room_name)
-    return {"user_count": count}
+    return {"user_count": 3}
 
 
 @sio.on("connect")
@@ -50,6 +50,18 @@ async def user_disconnect(sid: str, message: dict) -> None:
     user_in_room_service.remove_user_from_room(user_id, room_name)
 
     await sio.leave_room(user_id, room_name)
+
+
+@sio.event
+async def play_video(sid: str, message: dict) -> None:
+    logger.debug('play_video')
+    await sio.emit('play_video', message, room='roomm')
+
+
+@sio.event
+async def pause_video(sid: str, message: dict) -> None:
+    logger.debug('pause_video')
+    await sio.emit('pause_video', message, room='roomm')
 
 
 @sio.event

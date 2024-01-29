@@ -12,6 +12,7 @@ const API_BASE_URL = process.env.API_BASE_URL;
 const BACKEND_HOST = process.env.BACKEND_HOST;
 const BACKEND_PORT = process.env.BACKEND_PORT;
 const TEST_VIDEO_URL = process.env.TEST_VIDEO_URL;
+const SOCKETIO_URL = process.env.SOCKETIO_URL;
 
 const plugins = [
   new CleanWebpackPlugin(),
@@ -25,6 +26,7 @@ const plugins = [
     NODE_ENV: MODE,
     DEBUG: DEBUG,
     API_BASE_URL: API_BASE_URL,
+    SOCKETIO_URL: SOCKETIO_URL,
     BACKEND_HOST: BACKEND_HOST,
     BACKEND_PORT: BACKEND_PORT,
     TEST_VIDEO_URL: TEST_VIDEO_URL
