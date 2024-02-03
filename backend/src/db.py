@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
+from sqlalchemy.ext.declarative import declarative_base
 
 from .config.db import DataBaseConfig
-
 
 url = URL.create(
     drivername="postgresql",
@@ -13,3 +13,5 @@ url = URL.create(
 )
 
 engine = create_engine(url)
+Base = declarative_base()
+metadata = Base.metadata
