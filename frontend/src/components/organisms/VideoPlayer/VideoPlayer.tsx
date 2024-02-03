@@ -19,6 +19,8 @@ import {
 import { setIsInteracted } from "@redux/features/playerSlice";
 import { stringifyMessage } from "@utils/socketMessaeg";
 import { useUser } from "../../../providers/UserProvIder";
+import { useVideoPlayerSocketIO } from "@hooks/useVideoPlayerSocketIO";
+import { socket } from "../../../socket";
 
 
 const TEST_VIDEO_URL = process.env.TEST_VIDEO_URL as string;
@@ -30,7 +32,8 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = () => {
   
   const dispatch = useAppDispatch()
   
-  const ws = useVideoPlayerSocket(videoRef)
+  //const ws = useVideoPlayerSocket(videoRef)
+  useVideoPlayerSocketIO(videoRef);
   const videoOperations = useVideoOperations(videoRef);
   
   const isPaused = useAppSelector(isPausedSelector)
@@ -45,7 +48,9 @@ export const VideoPlayer: React.FC<IVideoPlayerProps> = () => {
       currentTime: videoRef.current?.currentTime,
       user
     }
-    ws?.send(stringifyMessage(message))
+    const data = stringifyMessage(message)
+    socket.emit(message.event, data)
+    // ws?.send(stringifyMessage(message))
   }, [isPaused])
 
 
