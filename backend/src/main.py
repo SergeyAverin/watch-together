@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from loguru import logger
 
 from .routers.player import player_router
+from .routers.user import user_router
 from .sio import socket_app
 from .middleware.catch_exceptions import catch_exceptions_middleware
 
@@ -26,6 +27,7 @@ app = FastAPI()
 app.middleware('http')(catch_exceptions_middleware)
 
 app.include_router(player_router)
+app.include_router(user_router)
 app.mount("/", socket_app)
 
 
