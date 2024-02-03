@@ -29,6 +29,16 @@ services:
     env_file:
       - .env
 
+  watch_together_pgadmin4:
+    image: dpage/pgadmin4
+    container_name: watch_together_pgadmin4
+    ports:
+      - 5050:80
+    env_file:
+      - .env
+    depends_on:
+      - watch_together_db
+
   redis:
     image: redis:7.2-rc2
     container_name: watch_together_redis
@@ -39,5 +49,7 @@ services:
     image: postgres
     container_name: watch_together_db
     restart: always
+    ports:
+      - 5432:5432
     env_file:
       - .env
