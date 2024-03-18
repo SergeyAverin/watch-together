@@ -15,6 +15,10 @@ class UserRepository(ABC):
         pass
 
     @abstractmethod
+    def get_user_by_email(self, email: str) -> UserDTO:
+        pass
+
+    @abstractmethod
     def create_user(self, user_data: UserDTO) -> UserDTO:
         pass
 
@@ -36,12 +40,24 @@ class UserRepositorySqlAlchemy(UserRepository):
 
             return user
 
+    def get_user_by_email(self, email: str) -> UserDTO:
+        with Session() as session:
+            logger.debug(f'user repository:  get user by email {email}')
+
+            stmt = select(User).where(User.email == email)
+            result = session.execute(stmt)
+            user = result.scalar()
+
+            logger.debug(f'user repository: user {user}')
+
+            return user
+
     def create_user(self, user_data: UserDTO) -> UserDTO:
         with Session() as session:
             user = User(
                 username=user_data.username,
                 email=user_data.email,
-                password=hash_password(user_data.password),
+                password=hash_password(user_data.password).decode("utf-8"),
                 is_staff=False
             )
             session.add(user)
