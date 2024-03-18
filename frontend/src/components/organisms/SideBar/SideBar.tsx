@@ -6,6 +6,7 @@ import "./SideBar.sass";
 import CopyLinkIcon from "@public/CopyLinkIcon.svg";
 import { UserCount } from "@molecules/UserCount";
 import { FollowPanelButton } from "@molecules/FollowPanelButton/FollowPanelButton";
+import LogoutButton from "@molecules/LogoutButton";
 
 interface ISideBarProps {}
 
@@ -27,7 +28,9 @@ const SideBar: React.FC<ISideBarProps> = () => {
           <FollowPanelButton />
         </div>
         <div>sdf</div>
-        <div>sdf</div>
+        <div>
+          <LogoutButton />
+        </div>
       </Flex>
     </div>
   );
