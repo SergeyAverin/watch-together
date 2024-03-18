@@ -1,10 +1,12 @@
 from os import environ
 
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
 from .routers.player import player_router
 from .routers.user import user_router
+from .routers.auth import auth_router
 from .sio import socket_app
 from .middleware.catch_exceptions import catch_exceptions_middleware
 
@@ -24,10 +26,27 @@ IS_DEBUG = environ.get('BACKEND_IS_DEBUG', default=False)
 
 app = FastAPI()
 
-app.middleware('http')(catch_exceptions_middleware)
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+]
 
-app.include_router(player_router)
-app.include_router(user_router)
+app.middleware('http')(catch_exceptions_middleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+api_router = APIRouter(prefix='/api/v1.0')
+
+api_router.include_router(player_router)
+api_router.include_router(user_router)
+api_router.include_router(auth_router)
+
+app.include_router(api_router)
 app.mount("/", socket_app)
 
 
