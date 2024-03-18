@@ -16,7 +16,7 @@ class UserService:
             email=user.email,
             is_staff=user.is_staff,
             password=user.password,
-            username=user.email
+            username=user.username
         )
 
         created_user = self.user_repository.create_user(user_data)
