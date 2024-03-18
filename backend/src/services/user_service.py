@@ -30,3 +30,10 @@ class UserService:
 
     def remove_user_by_username(self):
         pass
+
+    def get_user_by_email(self, email: str):
+        user = self.user_repository.get_user_by_email(email)
+
+        user_dto = UserDTO.model_validate(user, from_attributes=True)
+
+        return user_dto
