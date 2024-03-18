@@ -13,3 +13,7 @@ export const isCookieExist = (name: string): boolean => {
 export const setCookie = (name: string, value: string, days: number) => {
   Cookies.set(name, value);
 };
+
+export const removeCookie = (name: string) => {
+  Cookies.remove(name);
+};
