@@ -21,13 +21,18 @@ def login_jwt(email: Annotated[str, Form()], password: Annotated[str, Form()], r
 
     user = user_service.get_user_by_email(email)
 
+    invalid_user_error = HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="user inactive",
+    )
+
+    if not user:
+        raise invalid_user_error
+
     is_valid = valid_password(password, user.password.encode())
 
     if not is_valid:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="user inactive",
-        )
+        raise invalid_user_error
 
     payload = {
         "sub": user.email,

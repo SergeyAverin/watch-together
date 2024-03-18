@@ -3,7 +3,7 @@ import { baseApi } from "../baseApi";
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<
-      { access_token: string },
+      { access_token: string; status?: number },
       { email: string; password: string }
     >({
       query(data) {

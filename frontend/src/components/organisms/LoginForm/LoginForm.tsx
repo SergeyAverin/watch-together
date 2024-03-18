@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -18,17 +18,22 @@ export const LoginForm: React.FC = () => {
     formState: { errors },
   } = useForm<FormValues>();
   const [login] = useLoginMutation();
+  const [serverErrorMessage, setServerErrorMessage] = useState<string | null>(
+    null
+  );
   const navigate = useNavigate();
 
   const onSubmit = (data: FormValues) => {
     login({ email: data.email, password: data.password })
       .unwrap()
       .then((res) => {
-        console.log(res);
-
         setCookie("jwt", res.access_token, 100);
-
         navigate("/room/");
+      })
+      .catch((data) => {
+        if (data.status == 403) {
+          setServerErrorMessage("Invalid email or password");
+        }
       });
   };
 
@@ -62,6 +67,7 @@ export const LoginForm: React.FC = () => {
       <Submit value="Login" />
 
       {errors.email && <div>{errors.email.message}</div>}
+      {serverErrorMessage && <div>{serverErrorMessage}</div>}
     </Form>
   );
 };
