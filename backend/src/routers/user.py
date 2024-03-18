@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from ..services.user_service import UserService
 from ..repositories.user_repository import UserRepositorySqlAlchemy
-from ..schemas.user import UserCreateDTO, UserDTO
+from ..schemas.user import UserCreateDTO, AuthDataDTO
 
 
 user_router = APIRouter()

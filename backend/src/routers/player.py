@@ -1,11 +1,12 @@
 from json import dumps, loads
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from loguru import logger
 
 from ..sio import sio
 from ..services.user_in_room_service import UserInRoomService
 from ..repositories.users_in_room_repository import UsersInRoomRepositoryRedis
+from ..dependencies.auth import get_current_auth_user
 
 player_router = APIRouter()
 
@@ -14,8 +15,9 @@ user_in_room_service = UserInRoomService(
 
 
 @player_router.get('/{room_name}')
-def player(room_name: str):
+def player(room_name: str, user=Depends(get_current_auth_user)):
     count = user_in_room_service.get_len_users_in_room(room_name)
+    logger.debug(f'player view: {user}')
     return {"user_count": 3}
 
 
