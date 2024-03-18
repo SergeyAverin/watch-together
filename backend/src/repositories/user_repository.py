@@ -11,11 +11,11 @@ from ..db import Session
 
 class UserRepository(ABC):
     @abstractmethod
-    def get_user_by_username(self, username: str) -> UserDTO:
+    def get_user_by_username(self, username: str) -> UserDTO | None:
         pass
 
     @abstractmethod
-    def get_user_by_email(self, email: str) -> UserDTO:
+    def get_user_by_email(self, email: str) -> UserDTO | None:
         pass
 
     @abstractmethod
@@ -28,29 +28,30 @@ class UserRepository(ABC):
 
 
 class UserRepositorySqlAlchemy(UserRepository):
-    def get_user_by_username(self, username: str) -> User:
+    def get_user_by_username(self, username: str) -> UserDTO | None:
         with Session() as session:
-            logger.debug(f'user repository:  get user by username {username}')
-
             stmt = select(User).where(User.username == username)
             result = session.execute(stmt)
             user = result.scalar()
 
-            logger.debug(f'user repository: user {user}')
+            if not user:
+                return None
 
-            return user
+            user_dto = UserDTO.model_validate(user, from_attributes=True)
 
-    def get_user_by_email(self, email: str) -> UserDTO:
+            return user_dto
+
+    def get_user_by_email(self, email: str) -> UserDTO | None:
         with Session() as session:
-            logger.debug(f'user repository:  get user by email {email}')
-
             stmt = select(User).where(User.email == email)
             result = session.execute(stmt)
             user = result.scalar()
 
-            logger.debug(f'user repository: user {user}')
+            if not user:
+                return None
 
-            return user
+            user_dto = UserDTO.model_validate(user, from_attributes=True)
+            return user_dto
 
     def create_user(self, user_data: UserDTO) -> UserDTO:
         with Session() as session:
@@ -60,8 +61,10 @@ class UserRepositorySqlAlchemy(UserRepository):
                 password=hash_password(user_data.password).decode("utf-8"),
                 is_staff=False
             )
+            logger.info(user)
             session.add(user)
             session.commit()
+            logger.info(user)
             return user
 
     def remove_user_by_username(self, username: str) -> None:

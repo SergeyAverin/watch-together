@@ -1,3 +1,5 @@
+from loguru import logger
+
 from ..repositories.user_repository import UserRepository
 from ..schemas.user import UserDTO, UserCreateDTO
 
@@ -21,12 +23,13 @@ class UserService:
 
         return created_user
 
-    def get_user_by_username(self, username: str) -> UserDTO:
+    def get_user_by_username(self, username: str) -> UserDTO | None:
         user = self.user_repository.get_user_by_username(username)
 
-        user_dto = UserDTO.model_validate(user, from_attributes=True)
+        if not user:
+            return None
 
-        return user_dto
+        return user
 
     def remove_user_by_username(self):
         pass
@@ -34,6 +37,7 @@ class UserService:
     def get_user_by_email(self, email: str):
         user = self.user_repository.get_user_by_email(email)
 
-        user_dto = UserDTO.model_validate(user, from_attributes=True)
+        if not user:
+            return None
 
-        return user_dto
+        return user
