@@ -21,16 +21,18 @@ export const LoginForm: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: FormValues) => {
-    login({email: data.email, password: data.password}).then((res) => {
-      console.log(res)
+    login({ email: data.email, password: data.password })
+      .unwrap()
+      .then((res) => {
+        console.log(res);
 
-      //  setCookie('jwt', data.res.access_token, 1)
+        setCookie("jwt", res.access_token, 100);
 
-      navigate('/room/')
-    })
+        navigate("/room/");
+      });
   };
 
-  const isExist =isCookieExist('jwt')
+  const isExist = isCookieExist("jwt");
 
   useEffect(() => {
     if (isExist) {
@@ -52,7 +54,10 @@ export const LoginForm: React.FC = () => {
       />
 
       <label htmlFor="password">Password</label>
-      <input type="password" {...register("password", { required: "password is required" })} />
+      <input
+        type="password"
+        {...register("password", { required: "password is required" })}
+      />
 
       <Submit value="Login" />
 

@@ -6,12 +6,14 @@ export const getCookie = (name: string): string | undefined => {
 };
 
 export const isCookieExist = (name: string): boolean => {
-  const value = Cookies.get(name);
+  const value = getCookie(name);
   return value ? true : false;
 };
 
-export const setCookie = (name: string, value: string, days: number) => {
-  Cookies.set(name, value);
+export const setCookie = (name: string, value: string, expires: number) => {
+  Cookies.set(name, value, {
+    expires: expires,
+  });
 };
 
 export const removeCookie = (name: string) => {
