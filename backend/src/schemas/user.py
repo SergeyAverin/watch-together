@@ -1,12 +1,17 @@
 from pydantic import BaseModel, EmailStr
 
 
-class UserCreateDTO(BaseModel):
+class UserDTO(BaseModel):
     username: str
     email: EmailStr
     password: str
-
-
-class UserDTO(UserCreateDTO):
-    id: int
     is_staff: bool
+
+
+class UserCreateDTO(UserDTO):
+    password2: str
+
+
+class AuthDataDTO(BaseModel):
+    email: EmailStr
+    password: str
