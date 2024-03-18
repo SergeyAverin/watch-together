@@ -7,7 +7,7 @@ export const getCookie = (name: string): string | undefined => {
 
 export const isCookieExist = (name: string): boolean => {
   const value = Cookies.get(name);
-  return name != undefined ? true : false;
+  return value ? true : false;
 };
 
 export const setCookie = (name: string, value: string, days: number) => {

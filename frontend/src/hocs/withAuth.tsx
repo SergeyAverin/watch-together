@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export function withAuth(WrappedComponent: React.FC) {
   return function WithAuth() {
     const navigate = useNavigate();
-    const isExist =isCookieExist('jwt')
+    const isExist = isCookieExist("jwt");
 
     useEffect(() => {
       if (!isExist) {
