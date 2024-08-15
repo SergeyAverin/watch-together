@@ -4,7 +4,7 @@ services:
   watch_together_backend:
     build:
       context: backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfil.dev
     container_name: watch_together_backend
     restart: always
     volumes:
@@ -12,7 +12,7 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - .env
+      - .env.dev
 
   watch_together_frontend:
     build:
@@ -27,7 +27,7 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - .env
+      - .env.dev
 
   watch_together_pgadmin4:
     image: dpage/pgadmin4
@@ -35,7 +35,7 @@ services:
     ports:
       - 5050:80
     env_file:
-      - .env
+      - .env.dev
     depends_on:
       - watch_together_db
 
@@ -52,4 +52,4 @@ services:
     ports:
       - 5432:5432
     env_file:
-      - .env
+      - .env.dev
