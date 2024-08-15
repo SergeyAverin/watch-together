@@ -1,18 +1,23 @@
 import React from "react";
 
-import MainRouter from "./routers";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import './sass/style.sass'
+import MainRouter from "./routers";
+import { UserProvider } from "./providers/UserProvIder";
+import { store } from "@redux/store";
 
+import "./sass/style.sass";
 
 const App: React.FC = () => {
   return (
-    <div>
-      <BrowserRouter>
+    <Provider store={store}>
+      <UserProvider>
+        <BrowserRouter>
           <MainRouter />
-      </BrowserRouter>
-    </div>
+        </BrowserRouter>
+      </UserProvider>
+    </Provider>
   );
 };
 

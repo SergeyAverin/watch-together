@@ -1,0 +1,18 @@
+.volume-progress-bar
+    display: flex
+    align-items: center
+    width: 150px
+
+    &__bar
+        transition: .3s
+        width: 0
+
+    &__icon
+        margin-right: 14px
+        display: flex
+        align-items: center
+        justify-content: center
+    &:hover
+        .volume-progress-bar__bar
+            transition: .3s
+            width: 100%

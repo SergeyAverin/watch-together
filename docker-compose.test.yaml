@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  test_watch_together_backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile.test
+    container_name: test_watch_together_backend
+    volumes:
+      - ./backend:/usr/src/app
+    env_file:
+      - .env.test
+
+  redis:
+    image: redis:7.2-rc2
+    container_name: test_watch_together_redis
+    ports:
+      - 6379:6379
+
+  watch_together_db:
+    image: postgres
+    container_name: test_watch_together_db
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - .env.test
