@@ -48,7 +48,7 @@ export const RegistrationForm: React.FC = () => {
 
   useEffect(() => {
     if (isExist) {
-      navigate("/room/");
+      navigate("/rooms/");
     }
   }, [isExist]);
 

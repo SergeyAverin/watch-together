@@ -28,7 +28,7 @@ export const LoginForm: React.FC = () => {
       .unwrap()
       .then((res) => {
         setCookie("jwt", res.access_token, 100);
-        navigate("/room/");
+        navigate("/rooms/");
       })
       .catch((data) => {
         if (data.status == 403) {
@@ -41,7 +41,7 @@ export const LoginForm: React.FC = () => {
 
   useEffect(() => {
     if (isExist) {
-      navigate("/room/");
+      navigate("/rooms/");
     }
   }, [isExist]);
 
