@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Input, Form, Submit } from "@atoms/index";
+import { Input, Form, Submit, Margin } from "@atoms/index";
 import { useLoginMutation } from "@redux/api/authApi";
 import { getCookie, isCookieExist, setCookie } from "@utils/cookie";
 
@@ -63,6 +63,10 @@ export const LoginForm: React.FC = () => {
         type="password"
         {...register("password", { required: "password is required" })}
       />
+
+      <Margin marginTop="15px">
+        <Link to={"/auth/registration"}>Registration</Link>
+      </Margin>
 
       <Submit value="Login" />
 
