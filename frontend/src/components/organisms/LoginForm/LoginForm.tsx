@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
-import { Input, Form, Submit, Margin } from "@atoms/index";
+import { Input, Form, Submit, Margin, LinkButton } from "@atoms/index";
 import { useLoginMutation } from "@redux/api/authApi";
 import { getCookie, isCookieExist, setCookie } from "@utils/cookie";
 
@@ -65,7 +65,7 @@ export const LoginForm: React.FC = () => {
       />
 
       <Margin marginTop="15px">
-        <Link to={"/auth/registration"}>Registration</Link>
+        <LinkButton to={"/auth/registration"}>Registration</LinkButton>
       </Margin>
 
       <Submit value="Login" />
