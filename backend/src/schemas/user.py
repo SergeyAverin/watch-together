@@ -8,8 +8,11 @@ class UserDTO(BaseModel):
     is_staff: bool
 
 
-class UserCreateDTO(UserDTO):
+class UserCreateDTO(BaseModel):
+    username: str
+    email: EmailStr
     password2: str
+    password: str
 
 
 class AuthDataDTO(BaseModel):

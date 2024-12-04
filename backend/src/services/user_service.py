@@ -14,7 +14,7 @@ class UserService:
 
         user_data = UserDTO(
             email=user.email,
-            is_staff=user.is_staff,
+            is_staff=False,
             password=user.password,
             username=user.username
         )
