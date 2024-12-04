@@ -4,7 +4,7 @@ services:
   watch_together_backend:
     build:
       context: backend
-      dockerfile: Dockerfil.dev
+      dockerfile: Dockerfile.dev
     container_name: watch_together_backend
     restart: always
     volumes:
