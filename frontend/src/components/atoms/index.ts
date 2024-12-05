@@ -9,3 +9,4 @@ export { Input } from "./Input/Input";
 export { Form } from "./Form/Form";
 export { Submit } from "./Submit/Submit";
 export { LinkButton } from "./LinkButton/LinkButton";
+export { Typography, TypographyVariant } from "./Typography/Typography";
