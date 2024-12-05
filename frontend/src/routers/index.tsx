@@ -6,6 +6,7 @@ import LoginPage from "@pages/LoginPage";
 import LogoutPage from "@pages/LogoutPage";
 import NotFoundPage from "@pages/NotFoundPage";
 import RegistrationsPage from "@pages/RegistrationsPage";
+import RoomsPage from "@pages/RoomsPage";
 
 const MainRouter: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const MainRouter: React.FC = () => {
       <Route path="/auth/logout" element={<LogoutPage />} />
       <Route path="/auth/registration" element={<RegistrationsPage />} />
       <Route path="/player/*" element={<PlayerPage />} />
-      {/* <Route path="/rooms/*" element={<PlayerPage />} /> */}
+      <Route path="/rooms/*" element={<RoomsPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
