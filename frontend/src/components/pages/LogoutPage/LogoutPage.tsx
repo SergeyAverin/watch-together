@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Center } from "@atoms/index";
 import { removeCookie } from "@utils/cookie";
 
-const LogoutPage: React.FC = () => {
+export const LogoutPage: React.FC = () => {
   const navigate = useNavigate();
   useEffect(() => {
     removeCookie("jwt");
@@ -16,5 +16,3 @@ const LogoutPage: React.FC = () => {
     </Center>
   );
 };
-
-export default LogoutPage;

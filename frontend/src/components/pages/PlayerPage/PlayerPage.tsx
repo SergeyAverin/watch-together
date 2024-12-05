@@ -7,8 +7,7 @@ import { UsersPanel } from "@organisms/UsersPanel";
 import { FollowPanel } from "@organisms/FollowPanel/FollowPanel";
 import { withAuth } from "@hocs/withAuth";
 
-
-const PlayerPage: React.FC = () => {
+export const PlayerPage: React.FC = withAuth(() => {
   return (
     <Center>
       <div>
@@ -19,6 +18,4 @@ const PlayerPage: React.FC = () => {
       </div>
     </Center>
   );
-};
-
-export default withAuth(PlayerPage);
+});

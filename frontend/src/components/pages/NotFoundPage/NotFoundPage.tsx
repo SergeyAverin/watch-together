@@ -2,8 +2,7 @@ import React from "react";
 
 import { Center } from "@atoms/index";
 
-
-const NotFoundPage: React.FC = () => {
+export const NotFoundPage: React.FC = () => {
   return (
     <Center>
       404
@@ -12,5 +11,3 @@ const NotFoundPage: React.FC = () => {
     </Center>
   );
 };
-
-export default NotFoundPage;
