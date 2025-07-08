@@ -1,12 +1,18 @@
 import RoomCard from "@organisms/RoomCard";
 import React from "react";
 import "./RoomPage.sass";
-import { Typography, TypographyVariant } from "@atoms/index";
+import {
+  Button,
+  ButtonVariant,
+  Typography,
+  TypographyVariant,
+} from "@atoms/index";
 
 export const RoomsPage: React.FC = () => {
   return (
     <div className="wrapper">
       <Typography variant={TypographyVariant.H1}>Owned room</Typography>
+      <Button variant={ButtonVariant.FULL}>Add room</Button>
       <div className="roomCardGrid">
         <RoomCard />
         <RoomCard />
