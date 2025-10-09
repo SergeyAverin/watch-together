@@ -3,7 +3,7 @@ from sqlalchemy.engine import URL
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from .config.db import DataBaseConfig
+from core.config.db import DataBaseConfig
 
 url = URL.create(
     drivername="postgresql",

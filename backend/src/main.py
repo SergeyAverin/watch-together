@@ -4,11 +4,11 @@ from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
-from .routers.player import player_router
-from .routers.user import user_router
-from .routers.auth import auth_router
-from .sio import socket_app
-from .middleware.catch_exceptions import catch_exceptions_middleware
+# from sio import socket_app
+# from routers.player import player_router
+from routers.user import user_router
+# from routers.auth import auth_router
+from core.middleware.catch_exceptions import catch_exceptions_middleware
 
 
 logger.add('./logs/errors.log', level='ERROR')
@@ -42,12 +42,12 @@ app.add_middleware(
 
 api_router = APIRouter(prefix='/api/v1.0')
 
-api_router.include_router(player_router)
+# api_router.include_router(player_router)
 api_router.include_router(user_router)
-api_router.include_router(auth_router)
+# api_router.include_router(auth_router)
 
 app.include_router(api_router)
-app.mount("/", socket_app)
+# app.mount("/", socket_app)
 
 
 async def startup_event():

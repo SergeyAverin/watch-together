@@ -4,8 +4,8 @@ from logging.config import fileConfig
 
 from alembic import context
 
-from src.config.db import DataBaseConfig
-from src.db import engine, metadata
+from config.db import DataBaseConfig
+from db import engine, metadata
 
 sys.path.append(os.path.join(sys.path[0], 'src'))
 

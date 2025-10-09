@@ -3,10 +3,10 @@ from json import dumps, loads
 from fastapi import APIRouter, Depends
 from loguru import logger
 
-from ..sio import sio
-from ..services.user_in_room_service import UserInRoomService
-from ..repositories.users_in_room_repository import UsersInRoomRepositoryRedis
-from ..dependencies.auth import get_current_auth_user
+from sio import sio
+from services.user_in_room_service import UserInRoomService
+from repositories.users_in_room_repository import UsersInRoomRepositoryRedis
+from core.dependencies.auth import get_current_auth_user
 
 player_router = APIRouter()
 

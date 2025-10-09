@@ -3,10 +3,10 @@ from typing_extensions import Annotated
 from loguru import logger
 from fastapi import APIRouter, Form, status, HTTPException, Response
 
-from ..repositories.user_repository import UserRepositorySqlAlchemy
-from ..services.user_service import UserService
-from ..utils.password_utils import valid_password
-from ..utils.jwt_utils import encode_jwt
+from repositories.user_repository import UserRepositorySqlAlchemy
+from services.user_service import UserService
+from core.utils.password_utils import valid_password
+from core.utils.jwt_utils import encode_jwt
 
 
 auth_router = APIRouter(prefix='/auth', tags=['auth'])

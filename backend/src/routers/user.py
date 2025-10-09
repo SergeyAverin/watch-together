@@ -1,15 +1,14 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-from loguru import logger
 
-from ..services.user_service import UserService
-from ..repositories.user_repository import UserRepositorySqlAlchemy
-from ..schemas.user import UserCreateDTO, AuthDataDTO
+from services.user_service import UserService
+from repositories.user_repository import UserRepository
+from schemas.user import UserCreateDTO
 
 
 user_router = APIRouter()
 
-user_repository = UserRepositorySqlAlchemy()
+user_repository = UserRepository()
 user_service = UserService(user_repository)
 
 
